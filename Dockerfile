@@ -5,7 +5,6 @@ RUN \
   apt-get update && \
   apt-get -y upgrade && \
   apt-get -y install build-essential ruby ruby-dev libxml2-dev libsqlite3-dev libxslt1-dev libpq-dev libmysqlclient-dev zlib1g-dev wget curl && \
-  gem install bosh_cli --no-ri --no-rdoc && \
   wget -O /usr/bin/bosh https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-2.0.42-linux-amd64 && \
   chmod +x /usr/bin/bosh && \
   apt-get -y install unzip && \
