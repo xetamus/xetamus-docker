@@ -15,15 +15,15 @@ RUN wget -O /usr/bin/bosh2 https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-
     chmod +x /usr/bin/bosh2
 
 RUN wget -O /usr/bin/spruce "https://github.com/geofffranks/spruce/releases/download/v1.1.2/spruce-linux-amd64" && \
-    chmod 755 /usr/bin/spruce
+    chmod +x /usr/bin/spruce
 
 RUN wget -O /usr/bin/spiff "https://github.com/cloudfoundry-incubator/spiff/releases/download/v1.0.7/spiff_linux_amd64" && \
-    chmod 755 /usr/bin/spiff
+    chmod +x /usr/bin/spiff
 
 RUN wget -O cfcli.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" && \
     tar -xvzf cfcli.tgz && \
-    chmod 755 cf && \
+    chmod +x cf && \
     mv cf /usr/bin
 
 RUN wget -O /usr/bin/bosh-init https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-0.0.81-linux-amd64 && \
-    chmod 755 /usr/bin/bosh-init
+    chmod +x /usr/bin/bosh-init
