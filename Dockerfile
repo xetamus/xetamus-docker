@@ -9,8 +9,10 @@ RUN apt-get update && \
     sudo apt-get update && \
     apt-get -y install git
 
+RUN gem install bosh_cli --no-ri --no-rdoc
+
 RUN wget -O /usr/bin/bosh https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-2.0.42-linux-amd64 && \
-    chmod +x /usr/bin/bosh
+    chmod +x /usr/bin/bosh2
 
 RUN wget -O /usr/bin/spruce "https://github.com/geofffranks/spruce/releases/download/v1.1.2/spruce-linux-amd64" && \
     chmod 755 /usr/bin/spruce
