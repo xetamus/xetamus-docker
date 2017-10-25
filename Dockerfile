@@ -28,6 +28,6 @@ RUN wget -O cfcli.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&
     chmod +x cf && \
     mv cf /usr/bin
 
-RUN export BOSH_INIT_LATEST_URL=$(curl https://api.github.com/repos/cloudfoundry/bosh-init/releases/latest | awk '/download_url.*linux/ {print $2}' | cut -d'"' -f2) && \
-    wget -O /usr/bin/bosh-init ${BOSH_INIT_LATEST_URL} && \
+RUN export BOSH_INIT_LATEST_VERSION=$(curl https://s3.amazonaws.com/bosh-init-artifacts/current-version) && \
+    wget -O /usr/bin/bosh-init https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-${BOSH_INIT_LATEST_VERSION}-linux-amd64 && \
     chmod +x /usr/bin/bosh-init
