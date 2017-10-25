@@ -11,13 +11,16 @@ RUN apt-get update && \
 
 RUN gem install bosh_cli --no-ri --no-rdoc
 
-RUN wget -O /usr/bin/bosh2 https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-2.0.42-linux-amd64 && \
+RUN export BOSH2_CLI_LATEST_VERSION=$(curl https://s3.amazonaws.com/bosh-cli-artifacts/cli-current-version) && \
+    wget -O /usr/bin/bosh2 https://s3.amazonaws.com/bosh-cli-artifacts/bosh-cli-${BOSH2_CLI_LATEST_VERSION}-linux-amd64 && \
     chmod +x /usr/bin/bosh2
 
-RUN wget -O /usr/bin/spruce "https://github.com/geofffranks/spruce/releases/download/v1.1.2/spruce-linux-amd64" && \
+RUN export SPRUCE_LATEST_URL=$(curl https://api.github.com/repos/geofffranks/spruce/releases/latest | awk '/download_url.*linux/ {print $2}') && \
+    wget -O /usr/bin/spruce ${SPRUCE_LATEST_URL} && \
     chmod +x /usr/bin/spruce
 
-RUN wget -O /usr/bin/spiff "https://github.com/cloudfoundry-incubator/spiff/releases/download/v1.0.7/spiff_linux_amd64" && \
+RUN export SPIFF_LATEST_URL=$(curl https://api.github.com/repos/cloudfoundry-incubator/spiff/releases/latest | awk '/download_url.*linux/ {print $2}') && \
+    wget -O /usr/bin/spiff ${SPIFF_LATEST_URL} && \
     chmod +x /usr/bin/spiff
 
 RUN wget -O cfcli.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&source=github" && \
@@ -25,5 +28,6 @@ RUN wget -O cfcli.tgz "https://cli.run.pivotal.io/stable?release=linux64-binary&
     chmod +x cf && \
     mv cf /usr/bin
 
-RUN wget -O /usr/bin/bosh-init https://s3.amazonaws.com/bosh-init-artifacts/bosh-init-0.0.81-linux-amd64 && \
+RUN export BOSH_INIT_LATEST_URL=$(curl https://api.github.com/repos/cloudfoundry/bosh-init/releases/latest | awk '/download_url.*linux/ {print $2}') && \
+    wget -O /usr/bin/bosh-init ${BOSH_INIT_LATEST_URL} && \
     chmod +x /usr/bin/bosh-init
